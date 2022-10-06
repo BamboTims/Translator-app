@@ -1,20 +1,22 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Flex, Heading, Spacer } from '@chakra-ui/react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ColorModeSwitcher } from '../../ColorModeSwitcher';
 
 const Header = () => {
   return (
-    <Box
-      padding="5px"
-      borderBottom="1px solid grey"
-      w="100%"
-      display="flex"
+    <Flex
+      minWidth="max-content"
       alignItems="center"
-      justifyContent="space-between"
+      p="5px 0"
+      borderBottom="2px solid grey"
     >
-      <Text>Translate</Text>
+      <Heading size="lg">
+        <Link to="/">Translate</Link>
+      </Heading>
+      <Spacer />
       <ColorModeSwitcher />
-    </Box>
+    </Flex>
   );
 };
 
