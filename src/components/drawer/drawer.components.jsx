@@ -35,8 +35,8 @@ const LangDrawer = props => {
             </InputGroup>
           </DrawerBody>
 
-          <DrawerFooter>
-            <Text>There are {languages.length} languages</Text>
+          <DrawerFooter textAlign="center">
+            <Text>There are {Object.keys(languages).length} languages</Text>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

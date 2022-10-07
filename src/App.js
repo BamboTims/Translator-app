@@ -1,3 +1,4 @@
+import languages from './languages/languages';
 import { Box } from '@chakra-ui/react';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -8,34 +9,12 @@ import TranslatePage from './page/translate/translate.page';
 
 class App extends Component {
   state = {
-    languages: {},
+    languages,
   };
 
   componentDidMount() {
-    this.getLanguages();
+    console.log(this.state.languages.length);
   }
-
-  getLanguages = async () => {
-    try {
-      const options = {
-        method: 'GET',
-        headers: {
-          'X-RapidAPI-Key':
-            'cf041ec36emsh7ea1ee7d0932ebbp18802ajsn5dbf3d50a9b2',
-          'X-RapidAPI-Host': 'microsoft-translator-text.p.rapidapi.com',
-        },
-      };
-
-      const response = await fetch(
-        'https://microsoft-translator-text.p.rapidapi.com/languages?api-version=3.0',
-        options
-      );
-      const languages = await response.json();
-      this.setState({ languages });
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   render() {
     return (
