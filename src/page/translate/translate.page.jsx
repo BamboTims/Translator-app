@@ -10,6 +10,7 @@ class TranslatePage extends Component {
     to: '',
     text: '',
     isOpen: false,
+    isLanguageTo: false,
   };
 
   handleChange = e => {
@@ -20,8 +21,26 @@ class TranslatePage extends Component {
     this.setState({ isOpen: !this.state.isOpen });
   };
 
+  changeLanguageFrom = lang => {
+    this.setState({ from: lang });
+  };
+  changeLanguageTo = lang => {
+    this.setState({ to: lang });
+  };
+
+  switchLanguages = () => {
+    const temp = this.state.to;
+    this.setState({ to: this.state.from, from: temp });
+  };
+
   render() {
     const { languages } = this.props;
+    const changeLanguage = this.state.isLanguageTo
+      ? this.changeLanguageTo
+      : this.changeLanguageFrom;
+    const languageTo = this.state.to?.name;
+    const languageFrom = this.state.from?.name;
+
     return (
       <Flex
         direction="column"
@@ -36,18 +55,35 @@ class TranslatePage extends Component {
           w={{ base: '100%', md: '100%', lg: '50%' }}
         >
           <Box>
-            <Button size="lg" onClick={this.toggleDrawer}>
-              <Text>Germany</Text>
+            <Button
+              size="lg"
+              onClick={() => {
+                this.toggleDrawer();
+                this.setState({ isLanguageTo: false });
+              }}
+            >
+              <Text>{languageFrom || 'Choose'}</Text>
             </Button>
           </Box>
 
-          <Button colorScheme="black" variant="ghost" size="lg">
+          <Button
+            colorScheme="black"
+            variant="ghost"
+            size="lg"
+            onClick={this.switchLanguages}
+          >
             <Icon as={Shufle} />
           </Button>
 
           <Box>
-            <Button size="lg" onClick={this.toggleDrawer}>
-              <Text>French</Text>
+            <Button
+              size="lg"
+              onClick={() => {
+                this.toggleDrawer();
+                this.setState({ isLanguageTo: true });
+              }}
+            >
+              <Text>{languageTo || 'Choose'}</Text>
             </Button>
           </Box>
         </Flex>
@@ -61,17 +97,18 @@ class TranslatePage extends Component {
             <TextArea
               handleChange={this.handleChange}
               value={this.state.text}
-              text="Translate From"
+              text={`Translate from : ${languageFrom || ''}`}
             />
           </Flex>
           <Flex direction="column">
-            <TextArea value={this.state.to} text="Translate To" />
+            <TextArea text={`Translate to : ${languageFrom || ''}`} />
           </Flex>
         </Flex>
         <LangDrawer
           isOpen={this.state.isOpen}
           onClose={this.toggleDrawer}
           languages={languages}
+          changeLanguage={changeLanguage}
         />
       </Flex>
     );

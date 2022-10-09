@@ -9,12 +9,11 @@ import TranslatePage from './page/translate/translate.page';
 
 class App extends Component {
   state = {
-    languages,
+    languages: Object.entries(languages).map(([key, values]) => ({
+      code: key,
+      ...values,
+    })),
   };
-
-  componentDidMount() {
-    console.log(this.state.languages.length);
-  }
 
   render() {
     return (
