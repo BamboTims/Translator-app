@@ -101,7 +101,7 @@ class TranslatePage extends Component {
             />
           </Flex>
           <Flex direction="column">
-            <TextArea text={`Translate to : ${languageFrom || ''}`} />
+            <TextArea text={`Translate to : ${languageTo || ''}`} />
           </Flex>
         </Flex>
         <LangDrawer
