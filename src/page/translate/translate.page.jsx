@@ -3,6 +3,7 @@ import { Flex, Box, Text, Button, Icon } from '@chakra-ui/react';
 import { ReactComponent as Shufle } from '../../assets/shuffle-svgrepo-com.svg';
 import TextArea from '../../components/textarea/textarea.component';
 import LangDrawer from '../../components/drawer/drawer.components';
+import { options, fetchTranslations } from '../../utils/utils';
 
 class TranslatePage extends Component {
   state = {
@@ -15,6 +16,7 @@ class TranslatePage extends Component {
 
   handleChange = e => {
     this.setState({ text: e.target.value });
+    
   };
 
   toggleDrawer = () => {
@@ -101,7 +103,7 @@ class TranslatePage extends Component {
             />
           </Flex>
           <Flex direction="column">
-            <TextArea text={`Translate to : ${languageTo || ''}`} />
+            <TextArea isDisabled text={`Translate to : ${languageTo || ''}`} />
           </Flex>
         </Flex>
         <LangDrawer
