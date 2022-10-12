@@ -4,6 +4,7 @@ import { ReactComponent as Shufle } from '../../assets/shuffle-svgrepo-com.svg';
 import TextArea from '../../components/textarea/textarea.component';
 import LangDrawer from '../../components/drawer/drawer.components';
 import { options, fetchTranslations } from '../../utils/utils';
+import AlertPop from '../../components/alert/alert.component';
 
 class TranslatePage extends Component {
   state = {
@@ -16,7 +17,6 @@ class TranslatePage extends Component {
 
   handleChange = e => {
     this.setState({ text: e.target.value });
-    
   };
 
   toggleDrawer = () => {
@@ -51,6 +51,9 @@ class TranslatePage extends Component {
         height="80vh"
         gap={5}
       >
+        {!this.state.to && !this.state.from ? (
+          <AlertPop error={'Choose a language'} />
+        ) : null}
         <Flex
           align="center"
           justify="space-evenly"
